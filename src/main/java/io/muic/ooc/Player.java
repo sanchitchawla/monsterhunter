@@ -1,10 +1,10 @@
 package io.muic.ooc;
 
 import io.muic.ooc.Item.Item;
+import io.muic.ooc.WorldMap.GameMap;
+import io.muic.ooc.WorldMap.Room;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Player {
@@ -26,6 +26,27 @@ public class Player {
     private Bag bag = new Bag();
 
     private boolean isAlive;
+
+    private GameMap map = new GameMap();
+
+    private int x = 2;
+    private int y = 0;
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
 
     public int getMAX_HP() {
         return MAX_HP;
@@ -98,7 +119,7 @@ public class Player {
     }
 
     public Map<String, String> getStats(){
-        Map<String, String> stats = new HashMap<String, String>();
+        Map<String, String> stats = new HashMap<>();
         stats.put("Current HP",Integer.toString(getHP()));
         stats.put("Current room", Integer.toString(getLevel()));
         stats.put("Attack Power", Double.toString(getAttackPower()));
@@ -111,6 +132,11 @@ public class Player {
             stats.put("Weapon " + (i + 1), bag.weapons.get(i).toString());
         }
         return stats;
+    }
+
+    private boolean isRoomValidMove(String dir){
+        Room currentRoom = this.map.worldMap.get(level)[x][y];
+        return currentRoom.canGo(dir);
     }
 
 

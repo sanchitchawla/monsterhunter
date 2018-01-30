@@ -33,7 +33,7 @@ public class GameSession {
 
     public static Boss getInstanceOfBoss(){
         if (boss == null){
-            return new BossLevelOne();
+            boss = new BossLevelOne();
         }
         return boss;
     }
@@ -55,7 +55,8 @@ public class GameSession {
                 System.out.println("Unknown Command, try 'help'");
             }
             else {
-                command.apply(commandLine[2]);
+                // Change this
+                command.apply(commandLine[1]);
             }
         }
 

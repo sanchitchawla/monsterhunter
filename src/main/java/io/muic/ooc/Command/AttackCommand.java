@@ -38,8 +38,8 @@ public class AttackCommand implements Command{
         // Get weapon
         Weapon weapon = weapons.get(s);
 
-        // Check on this with Aj with Inventory abstract class
-        if (player.getInventory().contains(weapon)){
+
+        if (player.getBag().getWeapons().contains(weapon)){
             damage = weapon.getDAMAGE();
         } else{
             System.out.println("You don't have this weapon");

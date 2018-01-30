@@ -12,7 +12,7 @@ public class HealCommand implements Command{
     public void apply(String s) {
 
         // if does not contain
-        if (!player.getInventory().contains(new Potion())){
+        if (!player.getBag().getItems().contains(new Potion())){
             System.out.println("You don't have any potion!");
             return;
         }

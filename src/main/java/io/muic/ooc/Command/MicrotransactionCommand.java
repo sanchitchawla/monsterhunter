@@ -11,8 +11,8 @@ public class MicrotransactionCommand implements Command{
         System.out.println("Payment of " + s + "  received");
         player = GameSession.getInstanceOfPlayer();
 
-        player.setAttackPower(1.2);
-        player.setDefendPower(1.2);
+        player.setAttackPower(player.getAttackPower() * (Integer.parseInt(s)));
+        player.setDefendPower(player.getDefendPower() * (Integer.parseInt(s)));
         player.setMAX_HP(1000);
     }
 }
