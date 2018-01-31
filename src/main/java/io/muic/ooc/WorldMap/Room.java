@@ -39,24 +39,20 @@ public class Room {
     }
 
 
-    public boolean addItem(Item item) {
+    public void addItem(Item item) {
         for(int i = 0; i < MAX_ITEMS;i++){
             if(itemList[i] == null){
                 itemList[i] = item;
-                return true;
             }
         }
-        return false;
     }
 
-    public boolean addWeapon(Weapon weapon) {
+    public void addWeapon(Weapon weapon) {
         for(int i = 0; i < MAX_ITEMS;i++){
             if(weaponList[i] == null){
                 weaponList[i] = weapon;
-                return true;
             }
         }
-        return false;
     }
 
 
@@ -73,27 +69,27 @@ public class Room {
     }
 
     public String getInfo(){
-        String rs = "";
-        rs += "This room contains: \n";
+        StringBuilder rs = new StringBuilder();
+        rs.append("This room contains: \n");
         for(Item item : itemList){
             if(item!=null)
-                rs += item +"\n"; // getInfo
+                rs.append(item.getName()).append("\n"); // getInfo
         }
         for (Weapon weapon: weaponList){
             if (weapon != null){
-                rs+= weapon + "\n"; //getInfo
+                rs.append(weapon).append("\n"); //getInfo
             }
         }
         if(this.boss != null) {
-            rs += "\n======================================= \n";
-            rs += "\nHas guardian: " + getBoss()+"\n"; // getInfo
+            rs.append("\n======================================= \n");
+            rs.append("\nHas Boss: ").append(getBoss()).append("\n"); // getInfo
         }
-        rs+="\n======================================= \n";
-        rs += "\nYou can go the other room in following direction(s): \n";
+        rs.append("\n======================================= \n");
+        rs.append("\nYou can go the other room in following direction(s): \n");
         for (String s: neighbors.keySet()){
-            rs+=s+" \n";
+            rs.append(s).append(" \n");
         }
-        return rs;
+        return rs.toString();
     }
 
     public boolean canProceed(){

@@ -20,14 +20,14 @@ public class GameMap {
     }
 
     public Room getFirstBossRoom(){
-        return worldMap.get(1)[1][1];
+        return worldMap.get(1)[1][2];
     }
 
     public Room getSecondBossRoom(){
-        return worldMap.get(2)[1][1];
+        return worldMap.get(2)[1][0];
     }
 
     public Room getFinalBossRoom(){
-        return worldMap.get(3)[0][2];
+        return worldMap.get(3)[0][0];
     }
 }

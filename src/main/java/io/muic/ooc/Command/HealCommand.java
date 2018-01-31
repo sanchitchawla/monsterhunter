@@ -10,6 +10,7 @@ public class HealCommand implements Command{
     private int HEALTH_INCREASE = 10;
 
     public void apply(String s) {
+        player = GameSession.getInstanceOfPlayer();
 
         // if does not contain
         if (!player.getBag().getItems().contains(new Potion())){

@@ -58,8 +58,7 @@ public class AttackCommand implements Command{
         System.out.println("Boss Health left: " + boss.getHealth());
         // You won
         if (boss.getHealth() <= 0){
-            System.out.println("You won!");
-            System.exit(0);
+            System.out.println("You defeated the floors boss!");
         }
     }
 }

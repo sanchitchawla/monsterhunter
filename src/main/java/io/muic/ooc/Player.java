@@ -32,7 +32,7 @@ public class Player {
 
     private GameMap map = new GameMap();
 
-    private int x = 0;
+    private int x = 2;
     private int y = 0;
 
     public int getX() {
@@ -139,11 +139,12 @@ public class Player {
 
     private boolean isRoomValidMove(String dir){
         Room currentRoom = this.map.worldMap.get(level)[x][y];
+        System.out.println();
+        System.out.println(x + "" + y);
         return currentRoom.canGo(dir);
     }
 
     public Room getCurrentRoom(){
-        System.out.println(x + "" + y);
         return this.map.worldMap.get(level)[x][y];
     }
 
@@ -179,6 +180,7 @@ public class Player {
     public int[] checkPos(){
         return new int[]{this.x,this.y};
     }
+
     public boolean canGoSecondFloor(){
         Room finalRoom = this.map.getFirstBossRoom();
         return finalRoom.getBoss()==null;
@@ -207,6 +209,43 @@ public class Player {
     public boolean clearFinalBoss() {
         Room lastRoom = this.map.getFinalBossRoom();
         return lastRoom.getBoss()==null;
+    }
+
+    private int isValidCollect(String item){
+        Room currentRoom = this.map.worldMap.get(level)[x][y];
+        Item[] allItem = currentRoom.getItemList();
+        for(int i = 0;i<allItem.length;i++){
+            Item currentItem = allItem[i];
+            if(currentItem!=null && item.equals(currentItem.getName())){
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    public int collect(String item){
+        int targetSlot = isValidCollect(item);
+
+        if (targetSlot > -1) {
+            Item[] roomItem = getCurrentRoom().getItemList();
+
+            if(item.contains("potion") || item.contains("poison")) {
+                bag.addItem(roomItem[targetSlot]);
+                roomItem[targetSlot] = null;
+                return 1;
+            }
+            else {
+                bag.addItem(item);
+                roomItem[targetSlot] = null;
+
+                return 0;
+            }
+
+        }
+        else {
+            return -1;
+        }
     }
 
 }

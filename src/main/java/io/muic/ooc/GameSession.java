@@ -25,6 +25,8 @@ public class GameSession {
             put("paytowin", new MicroTransactionCommand());
             put("heal", new HealCommand());
             put("go", new MoveCommand());
+            put("take", new TakeCommand());
+            put("drop", new DropItemCommand());
 
         }
     };
@@ -52,7 +54,8 @@ public class GameSession {
         player.setAlive(true);
 
         player.getBag().addWeapon(new Sword());
-
+        System.out.println("Hi, welcome to Monster Hunter World: CLI Edition");
+        System.out.println(player.getCurrentRoom().getInfo());
         while (player.isAlive()){
             System.out.print("You: ");
             String[] commandLine = scanner.nextLine().split("\\s+");

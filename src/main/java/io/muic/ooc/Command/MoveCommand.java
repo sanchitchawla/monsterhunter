@@ -28,7 +28,7 @@ public class MoveCommand implements Command{
                 System.out.println("Defeat the boss before you proceed!");
             }
             else {
-                System.out.println("Moving " + s + "......");
+                System.out.println("Moving " + s + ".....");
                 new LookAroundCommand().apply(s);
             }
         }

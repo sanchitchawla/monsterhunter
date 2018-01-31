@@ -17,6 +17,6 @@ public class LookAroundCommand implements Command{
     @Override
     public void apply(String s) {
         Room room = player.getCurrentRoom();
-//        System.out.println(room.getInfo());
+        System.out.println(room.getInfo());
     }
 }
