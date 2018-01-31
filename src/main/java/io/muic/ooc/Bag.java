@@ -12,17 +12,21 @@ public class Bag {
 
     private int BAG_SIZE_ITEMS = 3;
 
-    List<Weapon> weapons = new ArrayList<Weapon>();
+    List<Weapon> weapons = new ArrayList<>();
 
-    List<Item> items = new ArrayList<Item>();
+    List<Item> items = new ArrayList<>();
 
-    public List<Weapon> getWeapons() {
-        return weapons;
+    public List<String> getWeapons() {
+        List<String> weaponName = new ArrayList<>();
+        for (Weapon weapon : weapons) {
+            weaponName.add(weapon.getName());
+        }
+        return weaponName;
     }
 
-    public void setWeapons(List<Weapon> weapons) {
+    public void addWeapon(Weapon weapon) {
         if (weapons.size() < BAG_SIZE_WEAPONS){
-            this.weapons = weapons;
+            this.weapons.add(weapon);
         } else {
             System.out.println("Weapon bag is full!");
         }
@@ -41,4 +45,5 @@ public class Bag {
         }
 
     }
+
 }

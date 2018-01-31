@@ -11,7 +11,7 @@ import io.muic.ooc.Weapons.StarDestroyer;
 public class GenMap {
 
     public Room[][] getFirstFloor(){
-        Room[][] floor = new Room[2][2];
+        Room[][] floor = new Room[3][3];
 
         Room room00 = new Room();
 
@@ -20,25 +20,24 @@ public class GenMap {
 
         Room room10 = new Room();
 
-        Room room11 = new Room();
-        room11.setBoss(new BossLevelOne());
+        Room room02 = new Room();
+        room02.setBoss(new BossLevelOne());
 
         room00.setExit("right",room01);
-        room00.setExit("down",room10);
+        room00.setExit("up",room10);
 
-        room01.setExit("up", room11);
+        room01.setExit("right", room02);
         room01.setExit("left", room00);
-        room01.setExit("right", room10);
+        room01.setExit("up", room10);
 
-        room10.setExit("left", room00);
-        room10.setExit("right", room11);
+        room10.setExit("right", room02);
 
-        room11.setExit("up", room10);
+        room02.setExit("down", room01);
 
         floor[0][0] = room00;
         floor[0][1] = room01;
         floor[1][0] = room10;
-        floor[1][1] = room11;
+        floor[1][1] = room02;
 
         return floor;
     }
@@ -58,16 +57,15 @@ public class GenMap {
         room11.setBoss(new BossLevelTwo());
 
         room00.setExit("right",room01);
-        room00.setExit("down",room10);
+        room00.setExit("up",room10);
 
-        room01.setExit("up", room11);
+        room01.setExit("right", room11);
         room01.setExit("left", room00);
-        room01.setExit("right", room10);
+        room01.setExit("up", room10);
 
-        room10.setExit("left", room00);
-        room10.setExit("up", room11);
+        room10.setExit("right", room11);
 
-        room11.setExit("down", room10);
+        room11.setExit("down", room01);
 
         floor[0][0] = room00;
         floor[0][1] = room01;
@@ -79,9 +77,10 @@ public class GenMap {
 
     public Room[][] getThirdFloor(){
         // Change this
-        Room[][] floor = new Room[1][3];
+        Room[][] floor = new Room[2][3];
 
         Room room00 = new Room();
+        room00.addItem(new Potion());
 
         Room room01 = new Room();
         room01.addWeapon(new StarDestroyer());
@@ -89,8 +88,8 @@ public class GenMap {
         Room room02 = new Room();
         room02.setBoss(new FinalBoss());
 
-        room00.setExit("up", room01);
-        room00.setExit("right", room02);
+        room00.setExit("right", room01);
+        room00.setExit("up" , room02);
 
         room01.setExit("right", room02);
 

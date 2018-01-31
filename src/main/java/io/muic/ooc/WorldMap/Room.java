@@ -72,6 +72,30 @@ public class Room {
 
     }
 
+    public String getInfo(){
+        String rs = "";
+        rs += "This room contains: \n";
+        for(Item item : itemList){
+            if(item!=null)
+                rs += item +"\n"; // getInfo
+        }
+        for (Weapon weapon: weaponList){
+            if (weapon != null){
+                rs+= weapon + "\n"; //getInfo
+            }
+        }
+        if(this.boss != null) {
+            rs += "\n======================================= \n";
+            rs += "\nHas guardian: " + getBoss()+"\n"; // getInfo
+        }
+        rs+="\n======================================= \n";
+        rs += "\nYou can go the other room in following direction(s): \n";
+        for (String s: neighbors.keySet()){
+            rs+=s+" \n";
+        }
+        return rs;
+    }
+
     public boolean canProceed(){
         return this.boss == null;
     }

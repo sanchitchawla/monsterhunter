@@ -3,8 +3,12 @@ package io.muic.ooc;
 import io.muic.ooc.Boss.Boss;
 import io.muic.ooc.Boss.BossLevelOne;
 import io.muic.ooc.Command.*;
+import io.muic.ooc.Weapons.Sword;
+import io.muic.ooc.Weapons.Weapon;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -18,8 +22,9 @@ public class GameSession {
             // commands are added here using lambdas. It is also possible to dynamically add commands without editing the code.
             put("attack", new AttackCommand());
             put("exit", new ExitCommand());
-            put("paytowin", new MicrotransactionCommand());
+            put("paytowin", new MicroTransactionCommand());
             put("heal", new HealCommand());
+            put("go", new MoveCommand());
 
         }
     };
@@ -45,6 +50,8 @@ public class GameSession {
     static void run(){
         Scanner scanner = new Scanner(System.in);
         player.setAlive(true);
+
+        player.getBag().addWeapon(new Sword());
 
         while (player.isAlive()){
             System.out.print("You: ");

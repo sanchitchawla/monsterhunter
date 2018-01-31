@@ -3,12 +3,12 @@ package io.muic.ooc.Command;
 import io.muic.ooc.GameSession;
 import io.muic.ooc.Player;
 
-public class MicrotransactionCommand implements Command{
+public class MicroTransactionCommand implements Command{
 
     private Player player;
 
     public void apply(String s) {
-        System.out.println("Payment of " + s + "  received");
+        System.out.println("Payment of $" + s + "  received");
         player = GameSession.getInstanceOfPlayer();
 
         player.setAttackPower(player.getAttackPower() * (Integer.parseInt(s)));

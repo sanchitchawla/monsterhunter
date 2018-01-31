@@ -1,6 +1,7 @@
 package io.muic.ooc;
 
 import io.muic.ooc.Item.Item;
+import io.muic.ooc.Weapons.Sword;
 import io.muic.ooc.WorldMap.GameMap;
 import io.muic.ooc.WorldMap.Room;
 
@@ -22,6 +23,8 @@ public class Player {
     // Start at level one
     private int level = 1;
 
+    public boolean isBattle = false;
+
     // List of items in bag, length should be <= BAG_SIZE
     private Bag bag = new Bag();
 
@@ -29,7 +32,7 @@ public class Player {
 
     private GameMap map = new GameMap();
 
-    private int x = 2;
+    private int x = 0;
     private int y = 0;
 
     public int getX() {
@@ -139,6 +142,71 @@ public class Player {
         return currentRoom.canGo(dir);
     }
 
+    public Room getCurrentRoom(){
+        System.out.println(x + "" + y);
+        return this.map.worldMap.get(level)[x][y];
+    }
 
+    public int move(String dir){
+        if (!isBattle){
+            if (!getCurrentRoom().canProceed())
+                return -2;
+            dir = dir.toLowerCase();
+            if (isRoomValidMove(dir)){
+
+                switch (dir) {
+                    case "up":
+                        this.x -= 1;
+                        break;
+                    case "right":
+                        this.y += 1;
+                        break;
+                    case "left":
+                        this.y -= 1;
+                        break;
+                    case "down":
+                        this.x += 1;
+                        break;
+                }
+
+                return 1;
+            }
+            return -1;
+        }
+        return 0;
+    }
+
+    public int[] checkPos(){
+        return new int[]{this.x,this.y};
+    }
+    public boolean canGoSecondFloor(){
+        Room finalRoom = this.map.getFirstBossRoom();
+        return finalRoom.getBoss()==null;
+    }
+
+    public void goSecondFloor(){
+        this.level = 2;
+        this.x = 1;
+        this.y = 1;
+        this.attackPower += 0.1;
+        this.defendPower += 0.1;
+    }
+
+    public boolean isDead() {
+        return this.HP <= 0;
+    }
+
+    public void goThirdFloor() {
+        this.level = 3;
+        this.x = 1;
+        this.y = 0;
+        this.attackPower += 0.1;
+        this.defendPower += 0.1;
+    }
+
+    public boolean clearFinalBoss() {
+        Room lastRoom = this.map.getFinalBossRoom();
+        return lastRoom.getBoss()==null;
+    }
 
 }

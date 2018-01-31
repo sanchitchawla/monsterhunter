@@ -9,6 +9,7 @@ import io.muic.ooc.Weapons.Sword;
 import io.muic.ooc.Weapons.Weapon;
 
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Random;
 
 // Have to change logic cos have to use weapons
@@ -38,8 +39,7 @@ public class AttackCommand implements Command{
         // Get weapon
         Weapon weapon = weapons.get(s);
 
-
-        if (player.getBag().getWeapons().contains(weapon)){
+        if (player.getBag().getWeapons().contains(weapon.getName())){
             damage = weapon.getDAMAGE();
         } else{
             System.out.println("You don't have this weapon");
@@ -53,10 +53,9 @@ public class AttackCommand implements Command{
         if (rand > criticalHitProbability){
             damage *= 2.0;
         }
-
         double bossCurrentHealth = boss.getHealth();
         boss.setHealth(bossCurrentHealth - damage);
-
+        System.out.println("Boss Health left: " + boss.getHealth());
         // You won
         if (boss.getHealth() <= 0){
             System.out.println("You won!");
