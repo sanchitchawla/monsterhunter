@@ -3,10 +3,7 @@ package io.muic.ooc.WorldMap;
 import io.muic.ooc.Boss.Boss;
 import io.muic.ooc.Item.Item;
 import io.muic.ooc.Weapons.Weapon;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Room {

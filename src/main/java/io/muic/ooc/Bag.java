@@ -8,7 +8,6 @@ import java.util.List;
 
 public class Bag {
 
-
     private int BAG_SIZE_WEAPONS = 2;
 
     private int BAG_SIZE_ITEMS = 3;
