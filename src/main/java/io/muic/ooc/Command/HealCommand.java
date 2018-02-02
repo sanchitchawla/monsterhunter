@@ -13,12 +13,11 @@ public class HealCommand implements Command{
         player = GameSession.getInstanceOfPlayer();
 
         // if does not contain
-        if (!player.getBag().getItems().contains(new Potion())){
+        if (!player.getBag().contains("potion")){
             System.out.println("You don't have any potion!");
             return;
         }
 
-        System.out.println("Potion applied");
         player = GameSession.getInstanceOfPlayer();
         int currentHealth = player.getHP();
 
@@ -26,9 +25,14 @@ public class HealCommand implements Command{
             player.setHP(currentHealth + HEALTH_INCREASE);
         }
         else if (currentHealth != player.getMAX_HP()){
+            // If health is almost full
             player.setHP(player.getMAX_HP());
         }
+        else if (currentHealth == player.getMAX_HP()){
+            System.out.println("Your health is already full!");
+        }
 
+        System.out.println("Potion applied");
         System.out.println("HP " + player.getHP());
 
         // Remove potion from inventory

@@ -11,6 +11,12 @@ public class BossLevelOne implements Boss{
 
     private double health = 60;
 
+    private String name = "BossOne";
+
+    public String getName() {
+        return name;
+    }
+
     public double getHealth() {
         return health;
     }
@@ -33,5 +39,9 @@ public class BossLevelOne implements Boss{
         }
         player.setHP(currentHealth - DAMAGE);
 
+    }
+
+    public boolean isDead(){
+        return health <= 0;
     }
 }

@@ -10,6 +10,12 @@ public class FinalBoss implements Boss{
 
     private double health = 100;
 
+    private String name = "finalboss";
+
+    public String getName() {
+        return name;
+    }
+
     public double getHealth() {
         return health;
     }
@@ -32,6 +38,9 @@ public class FinalBoss implements Boss{
 
         }
         player.setHP(currentHealth - DAMAGE);
+    }
 
+    public boolean isDead(){
+        return health <= 0;
     }
 }

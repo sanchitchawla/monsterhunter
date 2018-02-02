@@ -110,7 +110,6 @@ public class Player {
     public void removeItemFromInventory(Item item){
         for (Item eachItem : bag.getItems()){
             if (eachItem.getName().equals(item.getName())){
-                // Consult with aj
                 bag.items.remove(eachItem);
                 // break so we remove only one
                 break;
@@ -124,7 +123,7 @@ public class Player {
     public Map<String, String> getStats(){
         Map<String, String> stats = new HashMap<>();
         stats.put("Current HP",Integer.toString(getHP()));
-        stats.put("Current room", Integer.toString(getLevel()));
+        stats.put("Current Floor", Integer.toString(getLevel()));
         stats.put("Attack Power", Double.toString(getAttackPower()));
 
         for(int i = 0; i < bag.items.size(); i++){
@@ -139,8 +138,6 @@ public class Player {
 
     private boolean isRoomValidMove(String dir){
         Room currentRoom = this.map.worldMap.get(level)[x][y];
-        System.out.println();
-        System.out.println(x + "" + y);
         return currentRoom.canGo(dir);
     }
 

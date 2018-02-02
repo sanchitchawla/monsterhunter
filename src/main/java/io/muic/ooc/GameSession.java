@@ -2,14 +2,13 @@ package io.muic.ooc;
 
 import io.muic.ooc.Boss.Boss;
 import io.muic.ooc.Boss.BossLevelOne;
+import io.muic.ooc.Boss.BossLevelTwo;
+import io.muic.ooc.Boss.FinalBoss;
 import io.muic.ooc.Command.*;
 import io.muic.ooc.Weapons.Sword;
 import io.muic.ooc.Weapons.Weapon;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class GameSession {
@@ -19,7 +18,6 @@ public class GameSession {
 
     private final static HashMap<String, Command> commands = new HashMap<String, Command>() {
         {
-            // commands are added here using lambdas. It is also possible to dynamically add commands without editing the code.
             put("attack", new AttackCommand());
             put("exit", new ExitCommand());
             put("paytowin", new MicroTransactionCommand());
@@ -27,6 +25,8 @@ public class GameSession {
             put("go", new MoveCommand());
             put("take", new TakeCommand());
             put("drop", new DropItemCommand());
+            put("help", new HelpCommand());
+            put("info", new InfoCommand());
 
         }
     };
@@ -42,6 +42,16 @@ public class GameSession {
         if (boss == null){
             boss = new BossLevelOne();
         }
+        else if (boss.isDead()){
+            if (Objects.equals(boss.getName(), "BossOne")){
+                boss = null;
+                boss = new BossLevelTwo();
+            }
+            else if (Objects.equals(boss.getName(), "BossTwo")){
+                boss = null;
+                boss = new FinalBoss();
+            }
+        }
         return boss;
     }
 
@@ -53,9 +63,11 @@ public class GameSession {
         Scanner scanner = new Scanner(System.in);
         player.setAlive(true);
 
+        // Player starts with a basic sword
         player.getBag().addWeapon(new Sword());
         System.out.println("Hi, welcome to Monster Hunter World: CLI Edition");
         System.out.println(player.getCurrentRoom().getInfo());
+
         while (player.isAlive()){
             System.out.print("You: ");
             String[] commandLine = scanner.nextLine().split("\\s+");
@@ -65,7 +77,6 @@ public class GameSession {
                 System.out.println("Unknown Command, try 'help'");
             }
             else {
-                // Change this
                 command.apply(commandLine[1]);
             }
         }

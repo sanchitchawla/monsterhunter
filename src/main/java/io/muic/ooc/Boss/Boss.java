@@ -8,4 +8,8 @@ public interface Boss {
 
     void setHealth(double health);
 
+    String getName();
+
+    boolean isDead();
+
 }

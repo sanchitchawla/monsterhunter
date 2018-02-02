@@ -1,6 +1,9 @@
 package io.muic.ooc.Command;
 
 import io.muic.ooc.Boss.Boss;
+import io.muic.ooc.Boss.BossLevelOne;
+import io.muic.ooc.Boss.BossLevelTwo;
+import io.muic.ooc.Boss.FinalBoss;
 import io.muic.ooc.GameSession;
 import io.muic.ooc.Player;
 import io.muic.ooc.Weapons.BigSword;
@@ -12,7 +15,6 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.Random;
 
-// Have to change logic cos have to use weapons
 public class AttackCommand implements Command{
 
     private Boss boss;
@@ -53,12 +55,31 @@ public class AttackCommand implements Command{
         if (rand > criticalHitProbability){
             damage *= 2.0;
         }
+
         double bossCurrentHealth = boss.getHealth();
         boss.setHealth(bossCurrentHealth - damage);
-        System.out.println("Boss Health left: " + boss.getHealth());
+        System.out.println("Boss Health Left: " + boss.getHealth());
+
+        /*
+        This is where the boss attacks
+         */
+        boss.attack();
+        System.out.println("Player Health Left: " + player.getHP());
+
         // You won
         if (boss.getHealth() <= 0){
             System.out.println("You defeated the floors boss!");
+
+            if (Objects.equals(boss.getName(), "BossOne")){
+                // Change boss
+                System.out.println("Going to the second floor! Wohooo");
+                player.goSecondFloor();
+            }
+            else if (Objects.equals(boss.getName(), "BossTwo")){
+                // change boss
+                System.out.println("Going to the third floor yassssssss");
+                player.goThirdFloor();
+            }
         }
     }
 }

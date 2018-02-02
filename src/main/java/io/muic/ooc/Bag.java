@@ -71,5 +71,13 @@ public class Bag {
         this.items.remove(itemTranslator.get(item));
     }
 
+    public boolean contains(String item){
+        for (Item item1 : items) {
+            if (item1.getName().equals(item)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

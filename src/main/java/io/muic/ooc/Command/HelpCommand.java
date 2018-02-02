@@ -7,6 +7,5 @@ public class HelpCommand implements Command{
         System.out.println("- heal, to heal yourself if you have a potion in your inventory");
         System.out.println("- info, to get stats about the current game");
         System.out.println("- paytowin, to give us money and become OP");
-
     }
 }
